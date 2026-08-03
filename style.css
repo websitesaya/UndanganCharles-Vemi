@@ -1,0 +1,556 @@
+/* =========================================================
+   THE WEDDING OF CHARLES & VEMI — LUXURY BASIC THEME
+   Design tokens
+   ========================================================= */
+:root{
+  --maroon-deep:   #430B10;
+  --maroon-mid:    #5C1119;
+  --maroon-line:   #7A1D24;
+  --cream:         #F6EEDC;
+  --cream-soft:    #FBF6EA;
+  --cream-line:    #E4D6B8;
+  --gold:          #C7A253;
+  --gold-bright:   #E6CB86;
+  --gold-deep:     #9C7C34;
+  --ink:           #2B1A12;
+  --ink-soft:      #6E5B49;
+  --shadow:        0 18px 40px -20px rgba(43,26,18,.55);
+
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body:    'EB Garamond', serif;
+  --font-script:  'Alex Brush', cursive;
+
+  --card-max: 480px;
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:var(--maroon-deep);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+img{ max-width:100%; display:block; }
+
+.stage{
+  max-width:var(--card-max);
+  margin:0 auto;
+  position:relative;
+  background:var(--cream);
+  min-height:100vh;
+  box-shadow:0 0 80px rgba(0,0,0,.55);
+}
+
+/* Locks page scroll while cover/curtain is showing */
+body.locked{ overflow:hidden; height:100vh; }
+
+/* ---------------------------------------------------------
+   Ornamental bits
+   --------------------------------------------------------- */
+.eyebrow{
+  font-family:var(--font-body);
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  font-size:.7rem;
+  color:var(--gold-deep);
+}
+.hairline{
+  width:64px; height:2px; margin:14px auto;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.corner-frame{
+  position:relative;
+  padding:26px;
+}
+.corner-frame::before,
+.corner-frame::after,
+.corner-frame > .cf-tr,
+.corner-frame > .cf-bl{
+  content:"";
+  position:absolute;
+  width:34px; height:34px;
+  border:1.5px solid var(--gold);
+}
+.corner-frame::before{ top:0; left:0; border-right:none; border-bottom:none; }
+.corner-frame::after{ bottom:0; right:0; border-left:none; border-top:none; }
+.corner-frame .cf-tr{ top:0; right:0; border-left:none; border-bottom:none; }
+.corner-frame .cf-bl{ bottom:0; left:0; border-right:none; border-top:none; }
+
+.section-title{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:2rem;
+  text-align:center;
+  color:var(--maroon-mid);
+  margin:.2em 0;
+}
+.section-kicker{
+  text-align:center;
+  font-family:var(--font-body);
+  font-style:italic;
+  color:var(--ink-soft);
+  font-size:.95rem;
+  margin-bottom:1.4rem;
+}
+
+section{
+  padding:64px 28px;
+  position:relative;
+  background:var(--cream);
+}
+section.alt{ background:var(--cream-soft); }
+section + section{ border-top:1px solid var(--cream-line); }
+
+/* =========================================================
+   1. OPENING / COVER
+   ========================================================= */
+#cover{
+  position:fixed; inset:0;
+  z-index:60;
+  max-width:var(--card-max);
+  margin:0 auto;
+  background:
+    url('assets/images/Latar.jpg') center/cover no-repeat,
+    radial-gradient(circle at 50% 20%, var(--maroon-mid), var(--maroon-deep) 70%);
+  color:var(--cream);
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+  text-align:center;
+  padding:40px 30px 56px;
+  overflow:hidden;
+}
+/* darkens the lower portion of the photo so text stays legible */
+.cover-scrim{
+  position:absolute; inset:0; z-index:1;
+  background:linear-gradient(180deg,
+    rgba(20,7,7,.15) 0%,
+    rgba(20,7,7,.35) 40%,
+    rgba(20,7,7,.75) 72%,
+    rgba(20,7,7,.92) 100%);
+  pointer-events:none;
+}
+#cover::before{
+  content:"";
+  position:absolute; inset:14px;
+  border:1px solid rgba(199,162,83,.55);
+  pointer-events:none;
+  z-index:2;
+}
+#cover::after{
+  content:"";
+  position:absolute; inset:22px;
+  border:1px solid rgba(199,162,83,.28);
+  pointer-events:none;
+  z-index:2;
+}
+.cover-inner{ position:relative; z-index:3; }
+.cover-eyebrow{
+  letter-spacing:.4em; text-transform:uppercase;
+  font-size:.72rem; color:var(--gold-bright);
+  margin-bottom:18px;
+}
+.cover-monogram{
+  font-family:var(--font-script);
+  font-size:4.4rem;
+  color:var(--gold-bright);
+  line-height:1;
+  margin:8px 0 4px;
+  text-shadow:0 2px 18px rgba(230,203,134,.35);
+}
+.cover-names{
+  font-family:var(--font-display);
+  font-size:1.5rem;
+  letter-spacing:.03em;
+  margin:6px 0 22px;
+}
+.cover-guest-label{
+  font-size:.78rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--gold-bright); opacity:.85; margin-top:26px;
+}
+.cover-guest-name{
+  font-family:var(--font-display);
+  font-size:1.35rem;
+  margin-top:6px;
+  padding-bottom:8px;
+  border-bottom:1px solid rgba(199,162,83,.5);
+  display:inline-block;
+  min-width:180px;
+}
+.btn-open{
+  margin-top:34px;
+  background:transparent;
+  border:1px solid var(--gold);
+  color:var(--gold-bright);
+  font-family:var(--font-body);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-size:.78rem;
+  padding:14px 30px;
+  border-radius:999px;
+  cursor:pointer;
+  transition:background .35s ease, color .35s ease, transform .2s ease;
+}
+.btn-open:hover{ background:var(--gold); color:var(--maroon-deep); }
+.btn-open:active{ transform:scale(.97); }
+.btn-open svg{ vertical-align:-3px; margin-right:8px; }
+
+/* =========================================================
+   2. CURTAIN
+   ========================================================= */
+.curtain-panel{
+  display:none; /* shown only via JS right before the open animation */
+  position:fixed; top:0; bottom:0;
+  width:50%; max-width:calc(var(--card-max) / 2);
+  z-index:70;
+  background:
+    repeating-linear-gradient(90deg,
+      var(--maroon-mid) 0 18px,
+      var(--maroon-deep) 18px 36px);
+  box-shadow:inset 0 0 60px rgba(0,0,0,.5);
+  transition:transform 1.35s cubic-bezier(.77,0,.18,1);
+  pointer-events:none;
+}
+.curtain-panel::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:0; height:26px;
+  background:
+    linear-gradient(180deg, var(--gold-deep), var(--gold));
+  clip-path:polygon(0 0,4% 100%,8% 0,12% 100%,16% 0,20% 100%,24% 0,28% 100%,32% 0,36% 100%,40% 0,44% 100%,48% 0,52% 100%,56% 0,60% 100%,64% 0,68% 100%,72% 0,76% 100%,80% 0,84% 100%,88% 0,92% 100%,96% 0,100% 100%,100% 0);
+}
+#curtain-left{ left:calc(50% - min(50%, var(--card-max) / 2)); }
+#curtain-right{ right:calc(50% - min(50%, var(--card-max) / 2)); }
+body.curtain-open #curtain-left{ transform:translateX(-102%); }
+body.curtain-open #curtain-right{ transform:translateX(102%); }
+
+/* =========================================================
+   3. SNOW OVERLAY
+   ========================================================= */
+#snow-canvas{
+  position:fixed; inset:0;
+  z-index:45;
+  pointer-events:none;
+  max-width:var(--card-max);
+  margin:0 auto;
+}
+
+/* =========================================================
+   4. QUOTE / HERO INTRO
+   ========================================================= */
+#quote{
+  text-align:center;
+  background:linear-gradient(180deg,var(--maroon-deep),var(--maroon-mid));
+  color:var(--cream-soft);
+  padding:70px 32px;
+}
+#quote .verse{
+  font-family:var(--font-display);
+  font-size:1.4rem;
+  line-height:1.7;
+  font-style:italic;
+}
+#quote .verse-ref{
+  margin-top:14px;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  font-size:.72rem;
+  color:var(--gold-bright);
+}
+#quote .cover-monogram{ font-size:2.6rem; margin-bottom:14px; }
+
+/* =========================================================
+   5. COUPLE SECTION
+   ========================================================= */
+.couple-grid{
+  display:flex; flex-direction:column; gap:44px;
+  margin-top:8px;
+}
+.couple-card{ text-align:center; }
+.couple-photo{
+  width:168px; height:168px;
+  border-radius:50%;
+  object-fit:cover;
+  margin:0 auto 18px;
+  border:3px solid var(--gold);
+  box-shadow:var(--shadow);
+  background:var(--cream-soft);
+}
+.couple-name{
+  font-family:var(--font-display);
+  font-size:1.7rem;
+  color:var(--maroon-mid);
+  margin:0 0 2px;
+}
+.couple-role{
+  font-size:.78rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--gold-deep); margin-bottom:14px;
+}
+.couple-meta{
+  font-size:.95rem; color:var(--ink-soft); line-height:1.8;
+}
+.couple-meta b{ color:var(--ink); font-weight:600; }
+.couple-divider{
+  display:flex; align-items:center; justify-content:center;
+  gap:10px; color:var(--gold);
+  font-family:var(--font-script); font-size:1.8rem;
+}
+.couple-divider .line{ width:40px; height:1px; background:var(--gold); }
+
+/* =========================================================
+   6. LOVE STORY / TIMELINE
+   ========================================================= */
+.timeline{
+  position:relative;
+  margin-top:20px;
+  padding-left:26px;
+  border-left:1.5px solid var(--gold);
+}
+.timeline-item{ position:relative; padding-bottom:34px; }
+.timeline-item:last-child{ padding-bottom:0; }
+.timeline-item::before{
+  content:"";
+  position:absolute; left:-31.5px; top:4px;
+  width:10px; height:10px; border-radius:50%;
+  background:var(--gold); border:2px solid var(--cream-soft);
+  box-shadow:0 0 0 1.5px var(--gold);
+}
+.timeline-year{
+  font-family:var(--font-display);
+  font-size:1.15rem; color:var(--maroon-mid); font-weight:600;
+}
+.timeline-text{ color:var(--ink-soft); font-size:.95rem; margin-top:3px; }
+
+/* =========================================================
+   7. EVENTS / ACARA
+   ========================================================= */
+.event-card{
+  background:var(--cream-soft);
+  border:1px solid var(--cream-line);
+  border-radius:14px;
+  padding:26px 22px;
+  margin-bottom:22px;
+  text-align:center;
+  box-shadow:var(--shadow);
+}
+.event-card h3{
+  font-family:var(--font-display);
+  color:var(--maroon-mid);
+  font-size:1.35rem;
+  margin:0 0 4px;
+}
+.event-card .event-sub{
+  font-size:.75rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--gold-deep); margin-bottom:16px;
+}
+.event-row{
+  display:flex; align-items:flex-start; gap:10px;
+  text-align:left; font-size:.92rem; color:var(--ink);
+  padding:8px 0;
+  border-top:1px dashed var(--cream-line);
+}
+.event-row:first-of-type{ border-top:none; }
+.event-row svg{ flex:0 0 auto; margin-top:3px; color:var(--gold-deep); }
+.btn-maps{
+  display:inline-flex; align-items:center; gap:8px;
+  margin-top:16px;
+  background:var(--maroon-mid); color:var(--cream);
+  text-decoration:none;
+  font-size:.8rem; letter-spacing:.08em;
+  padding:10px 20px; border-radius:999px;
+}
+
+.countdown{
+  display:flex; justify-content:center; gap:12px;
+  margin:26px 0 6px;
+}
+.cd-box{
+  background:var(--maroon-deep); color:var(--cream);
+  border-radius:10px; padding:12px 10px; min-width:60px;
+  text-align:center;
+}
+.cd-box .num{ font-family:var(--font-display); font-size:1.5rem; font-weight:600; color:var(--gold-bright); }
+.cd-box .lbl{ font-size:.6rem; letter-spacing:.1em; text-transform:uppercase; opacity:.85; }
+
+/* =========================================================
+   8. GALLERY
+   ========================================================= */
+.gallery-grid{
+  display:grid; grid-template-columns:repeat(2,1fr);
+  gap:10px; margin-top:10px;
+}
+.gallery-grid img{
+  width:100%; height:150px; object-fit:cover;
+  border-radius:8px; cursor:pointer;
+  border:1px solid var(--cream-line);
+  transition:transform .3s ease;
+}
+.gallery-grid img:hover{ transform:scale(1.03); }
+
+#lightbox{
+  position:fixed; inset:0; z-index:80;
+  background:rgba(20,8,8,.92);
+  display:none; align-items:center; justify-content:center;
+  padding:20px;
+}
+#lightbox.show{ display:flex; }
+#lightbox img{ max-height:80vh; border-radius:6px; box-shadow:0 20px 60px rgba(0,0,0,.6); }
+#lightbox .lb-close{
+  position:absolute; top:22px; right:22px;
+  color:var(--gold-bright); font-size:1.8rem; cursor:pointer; line-height:1;
+  background:none; border:none;
+}
+#lightbox .lb-nav{
+  position:absolute; top:50%; transform:translateY(-50%);
+  background:none; border:none; color:var(--gold-bright);
+  font-size:2rem; cursor:pointer; padding:10px;
+}
+#lightbox .lb-prev{ left:6px; }
+#lightbox .lb-next{ right:6px; }
+
+/* =========================================================
+   9. GIFT / AMPLOP DIGITAL
+   ========================================================= */
+.gift-card{
+  background:var(--cream-soft);
+  border:1px solid var(--cream-line);
+  border-radius:14px; padding:22px;
+  margin-bottom:16px;
+  box-shadow:var(--shadow);
+}
+.gift-bank{ font-size:.75rem; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-deep); }
+.gift-num{
+  font-family:var(--font-display); font-size:1.35rem; color:var(--ink);
+  margin:6px 0; letter-spacing:.03em;
+}
+.gift-owner{ font-size:.88rem; color:var(--ink-soft); margin-bottom:14px; }
+.btn-copy{
+  border:1px solid var(--maroon-mid); background:transparent; color:var(--maroon-mid);
+  padding:8px 18px; border-radius:999px; font-size:.78rem; cursor:pointer;
+  letter-spacing:.06em; transition:.25s;
+}
+.btn-copy:hover{ background:var(--maroon-mid); color:var(--cream); }
+.btn-copy.copied{ background:var(--gold); border-color:var(--gold); color:var(--maroon-deep); }
+
+/* =========================================================
+   10. UCAPAN & DOA (WISHES)
+   ========================================================= */
+#wishForm{ display:flex; flex-direction:column; gap:12px; margin-top:10px; }
+.wish-notice{
+  background:rgba(199,162,83,.15); border:1px solid var(--gold);
+  color:var(--gold-deep); font-size:.78rem; line-height:1.5;
+  padding:10px 14px; border-radius:8px; margin-bottom:14px;
+}
+#wishForm input, #wishForm select, #wishForm textarea{
+  font-family:var(--font-body);
+  border:1px solid var(--cream-line);
+  background:var(--cream-soft);
+  border-radius:8px;
+  padding:12px 14px;
+  font-size:.95rem;
+  color:var(--ink);
+}
+#wishForm textarea{ resize:vertical; min-height:80px; }
+.btn-send{
+  background:var(--maroon-mid); color:var(--cream);
+  border:none; border-radius:999px; padding:13px;
+  font-size:.85rem; letter-spacing:.1em; text-transform:uppercase;
+  cursor:pointer;
+}
+.btn-send:disabled{ opacity:.6; cursor:progress; }
+
+#wishList{ margin-top:28px; display:flex; flex-direction:column; gap:14px; max-height:420px; overflow-y:auto; padding-right:4px; }
+.wish-item{
+  background:var(--cream-soft); border-left:3px solid var(--gold);
+  border-radius:6px; padding:14px 16px;
+}
+.wish-name{ font-weight:600; color:var(--maroon-mid); font-family:var(--font-display); font-size:1.1rem; }
+.wish-status{ font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-deep); margin-left:6px; }
+.wish-text{ font-size:.9rem; color:var(--ink); margin-top:3px; line-height:1.55; }
+.wish-empty, .wish-loading{ text-align:center; color:var(--ink-soft); font-style:italic; font-size:.88rem; }
+
+/* =========================================================
+   11. CLOSING
+   ========================================================= */
+#closing{
+  text-align:center; background:var(--maroon-deep); color:var(--cream);
+  padding:70px 30px 100px;
+}
+#closing .cover-monogram{ font-size:2.6rem; }
+#closing p{ line-height:1.8; color:rgba(246,238,220,.85); }
+.closing-family{ margin-top:26px; font-family:var(--font-display); font-size:1.2rem; }
+.credit{
+  margin-top:40px; font-size:.68rem; letter-spacing:.1em;
+  color:rgba(246,238,220,.5);
+}
+
+/* =========================================================
+   12. FLOATING MUSIC BUTTON
+   ========================================================= */
+#musicToggle{
+  position:fixed; bottom:22px; right:calc(50% - min(50%, var(--card-max)/2) + 22px);
+  z-index:65;
+  width:52px; height:52px; border-radius:50%;
+  background:var(--maroon-mid); border:1px solid var(--gold);
+  color:var(--gold-bright);
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; box-shadow:var(--shadow);
+  animation:spin 6s linear infinite;
+  animation-play-state:paused;
+}
+#musicToggle.playing{ animation-play-state:running; }
+@keyframes spin{ from{ transform:rotate(0);} to{ transform:rotate(360deg);} }
+
+/* =========================================================
+   Reduced motion
+   ========================================================= */
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  .curtain-panel{ transition:none; }
+  #musicToggle{ animation:none; }
+}
+
+/* Focus visibility */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
+  outline:2px solid var(--gold-bright); outline-offset:2px;
+}
+
+/* =========================================================
+   RESPONSIVE — fluid type scale + small-screen fixes
+   ========================================================= */
+.cover-monogram{ font-size:clamp(2.8rem, 14vw, 4.4rem); }
+.cover-names{ font-size:clamp(1.15rem, 5.5vw, 1.5rem); }
+.section-title{ font-size:clamp(1.5rem, 7vw, 2rem); }
+#quote .verse{ font-size:clamp(1.05rem, 4.6vw, 1.4rem); }
+.couple-name{ font-size:clamp(1.3rem, 6vw, 1.7rem); }
+
+section{ padding:56px 20px; }
+#cover{ padding:32px 22px 48px; }
+
+.countdown{ flex-wrap:wrap; gap:8px; }
+.cd-box{ min-width:0; flex:1 1 64px; padding:10px 6px; }
+.cd-box .num{ font-size:clamp(1.1rem, 5.5vw, 1.5rem); }
+
+.event-card{ padding:20px 16px; }
+.gift-card{ padding:18px; }
+
+#wishForm input, #wishForm select, #wishForm textarea{ font-size:1rem; } /* prevents iOS auto-zoom on focus */
+
+@media (max-width:420px){
+  .gallery-grid img{ height:130px; }
+  .couple-photo{ width:150px; height:150px; }
+  .cover-guest-name{ font-size:1.15rem; min-width:0; }
+  .btn-maps{ font-size:.74rem; padding:9px 16px; }
+}
+
+@media (max-width:360px){
+  .cover-monogram{ font-size:clamp(2.4rem, 15vw, 3.6rem); }
+  .couple-photo{ width:130px; height:130px; }
+  .gallery-grid{ gap:8px; }
+  section{ padding:48px 16px; }
+}
+
+/* keep fixed helper elements from ever exceeding the card width on very wide desktop viewports */
+#musicToggle{ right:max(22px, calc(50% - min(50%, var(--card-max)/2) + 22px)); }
