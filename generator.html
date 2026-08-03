@@ -98,6 +98,14 @@ Terima kasih 🙏🤍</textarea>
 </div>
 
 <script>
+  // =====================================================================
+  // GANTI DI SINI kalau ingin mengunci link undangan secara pasti.
+  // Contoh: "https://websitesaya.github.io/UndanganCharles-Vemi/index.html"
+  // Kosongkan ("") kalau ingin link dideteksi otomatis dari alamat halaman
+  // generator ini dibuka (biasanya sudah benar dengan sendirinya).
+  // =====================================================================
+  const DEFAULT_INVITATION_URL = "https://websitesaya.github.io/UndanganCharles-Vemi/index.html";
+
   const baseUrlEl = document.getElementById("baseUrl");
   const waMessageEl = document.getElementById("waMessage");
   const guestNamesEl = document.getElementById("guestNames");
@@ -125,14 +133,19 @@ Terima kasih 🙏🤍</textarea>
     const autoUrl = detectBaseUrl();
     const isLocalFile = autoUrl.startsWith("file://");
 
-    // Pakai link tersimpan HANYA jika sebelumnya memang diubah manual oleh
-    // pengguna (custom domain, dsb). Selain itu selalu pakai deteksi otomatis.
-    if (saved.baseUrlIsCustom && saved.baseUrl) {
+    // Urutan prioritas link undangan:
+    // 1) DEFAULT_INVITATION_URL kalau diisi di atas (paling pasti)
+    // 2) link yang pernah diubah manual oleh pengguna
+    // 3) deteksi otomatis dari alamat generator.html ini dibuka
+    if (DEFAULT_INVITATION_URL) {
+      baseUrlEl.value = DEFAULT_INVITATION_URL;
+    } else if (saved.baseUrlIsCustom && saved.baseUrl) {
       baseUrlEl.value = saved.baseUrl;
     } else {
       baseUrlEl.value = isLocalFile ? (saved.baseUrl || "") : autoUrl;
     }
-    document.getElementById("autoTag").style.display = (!saved.baseUrlIsCustom && !isLocalFile) ? "inline" : "none";
+    document.getElementById("autoTag").style.display =
+      (!DEFAULT_INVITATION_URL && !saved.baseUrlIsCustom && !isLocalFile) ? "inline" : "none";
 
     if (saved.waMessage) waMessageEl.value = saved.waMessage;
     if (saved.guestNames) guestNamesEl.value = saved.guestNames;
